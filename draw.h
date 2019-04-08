@@ -18,7 +18,12 @@ namespace X
 namespace Xft
 {
     using Color = ::XftColor;
+    using Font = ::XftFont;
 }
+namespace Fontconfig
+{
+    using Pattern = ::FcPattern;
+} // end namespace Fontconfig
 namespace dwm {
 enum class ColorSchemeIndex
 {
@@ -31,13 +36,18 @@ struct Cursor {
     X::Cursor _cursor;
 };
 
-struct Font {
+class Font {
+    Font(X::Display& disp, unsigned int h, Xft::Font* font, Fontconfig::Pattern* pattern);
+    ~Font();
+    X::Display& getDisplay() noexcept { return _display; }
+    auto getH() const noexcept { return _h; }
+    auto getXFont() const noexcept { return _xfont; }
+    auto getPattern() const noexcept { return _pattern; }
+private:
     X::Display& _display;
     unsigned int _h;
     Xft::Font* _xfont = nullptr;
-    FcPattern* _pattern = nullptr;
-    //Font(X::Display& disp, unsigned int h, 
-    ~Font();
+    Fontconfig::Pattern* _pattern = nullptr;
 };
 
 class Draw {
