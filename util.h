@@ -4,18 +4,33 @@
 #include <sstream>
 namespace dwm
 {
+
+template<typename T>
+constexpr T max(T a, T b) noexcept {
+    return a > b ? a : b;
+}
+
+template<typename T>
+constexpr T min(T a, T b) noexcept {
+    return a < b ? a : b;
+}
+
+template<typename T>
+constexpr bool between(T x, T a, T b) noexcept {
+    return (a <= x) && (x <= b);
+}
+
+
+
 template<typename ... Args>
-void print(std::ostream& os, Args&& ... params) 
-{ 
+void print(std::ostream& os, Args&& ... params) { 
     (os << ... << params);
 }
 
-class Exception : public std::exception
-{
+class Exception : public std::exception {
 public:
     template<typename ... Args>
-    explicit Exception(Args&& ... args) noexcept 
-    {
+    explicit Exception(Args&& ... args) noexcept {
         std::ostringstream os;
         print(os, args...);
         _message = os.str();
