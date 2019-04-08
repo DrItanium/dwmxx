@@ -1,9 +1,9 @@
-#ifndef UTIL_H__
-#define UTIL_H__
+#ifndef DWMXX_UTIL_H__
+#define DWMXX_UTIL_H__
 #include <string>
 #include <sstream>
-namespace dwm
-{
+
+namespace dwm {
 
 template<typename T>
 constexpr T max(T a, T b) noexcept {
