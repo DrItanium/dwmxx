@@ -89,6 +89,14 @@ public: // colorscheme related
     
 public: // cursor related
 
+public: // manipulators
+    void setFonts(FontList& fonts);
+    void setColorscheme(ColorScheme& scheme);
+public: 
+    void rect(int x, int y, unsigned int w, unsigned int h, bool filled, bool invert);
+    int text(int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const std::string& text, bool invert);
+public: // map functions
+    void map(X::Window win, int x, int y , unsigned int w, unsigned int h);
 private:
     unsigned int _w, _h;
     X::Display& _dpy;
@@ -98,7 +106,6 @@ private:
     X::GC _gc;
     std::list<Color> _colorscheme;
     std::list<Font> _fonts;
-    
 };
 
 
