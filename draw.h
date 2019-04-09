@@ -19,6 +19,7 @@ namespace X {
 namespace Xft {
     using Color = ::XftColor;
     using Font = ::XftFont;
+    using Draw = ::XftDraw;
     using ::XftFontClose;
 }
 namespace Fontconfig {
@@ -66,9 +67,6 @@ public:
     using FontList = std::list<Font>;
     using FontIterator = FontList::iterator;
     using ConstFontIterator = FontList::const_iterator;
-    using Colorscheme = std::list<Color>;
-    using ColorschemeIterator= Colorscheme::iterator;
-    using ConstColorschemeIterator = Colorscheme::const_iterator;
 public:
     Draw(X::Display& display, int screen, X::Window win, unsigned int w, unsigned int h);
     ~Draw();
@@ -93,7 +91,9 @@ public: // font set related operations
     void installFont(const std::initializer_list<std::string>& fonts) noexcept;
     unsigned int getWidth(const std::string& text) noexcept;
 public: // colorscheme related
-    
+    Color& getForegroundColor() noexcept { return _foreground; }
+    Color& getBackgroundColor() noexcept { return _background; }
+    Color& getBorderColor()     noexcept { return _border; }
 public: // cursor related
 
 public: // manipulators
@@ -111,7 +111,9 @@ private:
     X::Window _root;
     X::Drawable _drawable;
     X::GC _gc;
-    std::list<Color> _colorscheme;
+    Color _foreground;
+    Color _background;
+    Color _border;
     std::list<Font> _fonts;
 };
 

@@ -133,5 +133,14 @@ Draw::map(X::Window win, int x, int y, unsigned int w, unsigned int h) {
     XSync(&_display, False);
 }
 
+void
+Draw::rect(int x, int y, unsigned int w, unsigned int h, bool filled, bool invert) {
+    XSetForeground(&_display, _gc, invert ? getBackgroundColor().pixel : getForegroundColor().pixel);
+    if (filled) {
+        XFillRectangle(&_display, _drawable, _gc, x, y , w, h);
+    } else {
+        XDrawRectangle(&_display, _drawable, _gc, x, y, w - 1, h - 1);
+    }
+}
 
 } // end namespace dwm
