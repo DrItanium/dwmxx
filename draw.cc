@@ -120,7 +120,7 @@ Font::getExts(const std::string& text, unsigned int* w, unsigned int* h) {
 
 unsigned int
 Draw::getWidth(const std::string& text) noexcept {
-    if (fonts.empty()) {
+    if (_fonts.empty()) {
         return 0;
     } else {
         return this->text(0, 0, 0, 0, 0, text, 0);
