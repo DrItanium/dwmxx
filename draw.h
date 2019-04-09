@@ -18,9 +18,11 @@ namespace X {
 namespace Xft {
     using Color = ::XftColor;
     using Font = ::XftFont;
+    using ::XftFontClose;
 }
 namespace Fontconfig {
     using Pattern = ::FcPattern;
+    using ::FcPatternDestroy;
 } // end namespace Fontconfig
 
 namespace dwm {
@@ -89,7 +91,7 @@ public: // cursor related
 
 public: // manipulators
     void setFonts(FontList& fonts);
-    void setColorscheme(ColorScheme& scheme);
+    void setColorscheme(Colorscheme& scheme);
 public: 
     void rect(int x, int y, unsigned int w, unsigned int h, bool filled, bool invert);
     int text(int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const std::string& text, bool invert);

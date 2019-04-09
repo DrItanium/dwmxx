@@ -12,7 +12,7 @@ namespace utf8 {
     constexpr long max[] = {0x10'FFFF, 0x7f, 0x7ff, 0xffff, 0x10'ffff};
     long decodeByte(const char c, size_t* i) {
         for (*i = 0; *i < (size + 1); ++(*i)) {
-            if (((unsigned char)c & mask[*i]) == byte[*i]) {
+            if (((unsigned char)c & mask[*i]) == bytes[*i]) {
                 return (unsigned char)c & ~mask[*i];
             }
         }
@@ -48,8 +48,18 @@ namespace utf8 {
         }
         *u = udecoded;
         validate(u, len);
+        return len;
     }
 } // end namespace utf8
+
+Font::~Font() {
+    if (_pattern) {
+        Fontconfig::FcPatternDestroy(_pattern);
+        _pattern = nullptr;
+    }
+    Xft::XftFontClose(&_display, _xfont);
+    _xfont = nullptr;
+}
 
 
 } // end namespace dwm

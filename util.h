@@ -15,8 +15,8 @@ constexpr T min(T a, T b) noexcept {
     return a < b ? a : b;
 }
 
-template<typename T>
-constexpr bool between(T x, T a, T b) noexcept {
+template<typename A, typename B, typename C>
+constexpr bool between(A x, B a, C b) noexcept {
     return (a <= x) && (x <= b);
 }
 
