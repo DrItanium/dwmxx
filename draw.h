@@ -7,26 +7,24 @@
 #include <X11/Xft/Xft.h>
 #include "util.h"
 
-namespace X
-{
+namespace X {
     using Cursor = ::Cursor;
     using Display = ::Display;
     using Window = ::Window;
     using Drawable = ::Drawable;
     using GC = ::GC;
 }
-namespace Xft
-{
+
+namespace Xft {
     using Color = ::XftColor;
     using Font = ::XftFont;
 }
-namespace Fontconfig
-{
+namespace Fontconfig {
     using Pattern = ::FcPattern;
 } // end namespace Fontconfig
+
 namespace dwm {
-enum class ColorschemeIndex
-{
+enum class ColorschemeIndex {
     Foreground,
     Background,
     Border,
