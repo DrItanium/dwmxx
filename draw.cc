@@ -143,4 +143,9 @@ Draw::rect(int x, int y, unsigned int w, unsigned int h, bool filled, bool inver
     }
 }
 
+void
+Draw::setColorscheme(Colorscheme& scheme) {
+
+}
+
 } // end namespace dwm
