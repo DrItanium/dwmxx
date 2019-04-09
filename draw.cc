@@ -61,5 +61,23 @@ Font::~Font() {
     _xfont = nullptr;
 }
 
+Draw::Draw(X::Display* disp, int screen, X::Window root, unsigned int w, unsigned int h)
+    : _display(disp), _screen(screen), _root(root), _w(w), _h(h) {
+        _drawable = XCreatePixmap(_display, _root, _w, _h, DefaultDepth(_display, _screen));
+        _gc = XCreateGC(_display, _root, 0, nullptr);
+        XSetLineAttributes(_display, _gc, 1, LineSolid, CapButt, JoinMiter);
+}
+
+void
+Draw::resize(unsigned int w, unsigned int h)
+{
+    _w = w;
+    _h = h;
+    if (_drawable) {
+        XFreePixmap(_display, _drawable);
+    }
+    _drawable = XCreatePixmap(_display, _root, _w, _h, DefaultDepth(_display, _screen));
+}
+
 
 } // end namespace dwm

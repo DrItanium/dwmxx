@@ -41,12 +41,13 @@ struct Cursor {
 };
 
 class Font {
-    Font(X::Display& disp, unsigned int h, Xft::Font* font, Fontconfig::Pattern* pattern);
+    Font(X::Display& disp, unsigned int h, Xft::Font* font, Fontconfig::Pattern* pattern) : _display(disp), _h(h), _xfont(font), _pattern(pattern) { }
     ~Font();
     X::Display& getDisplay() noexcept { return _display; }
+    const X::Display& getDisplay() const noexcept { return _display; }
     auto getH() const noexcept { return _h; }
-    auto getXFont() const noexcept { return _xfont; }
-    auto getPattern() const noexcept { return _pattern; }
+    auto getXFont() noexcept { return _xfont; }
+    auto getPattern() noexcept { return _pattern; }
     void getExts(const std::string& text, unsigned int len, unsigned int* w, unsigned int* h);
 private:
     X::Display& _display;
