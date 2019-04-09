@@ -91,6 +91,7 @@ public: // font set related operations
     auto font_cend() const noexcept { return _fonts.cend(); }
     void installFont(const std::string& font) noexcept;
     void installFont(const std::initializer_list<std::string>& fonts) noexcept;
+    unsigned int getWidth(const std::string& text) noexcept;
 public: // colorscheme related
     
 public: // cursor related
