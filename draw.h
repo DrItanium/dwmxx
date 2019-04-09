@@ -22,9 +22,9 @@ namespace Xft {
 }
 namespace Fontconfig {
     using Pattern = ::FcPattern;
-    using Bool = ::FcBool;
     using ::FcPatternDestroy;
-    using ::FcPatternGetBool;
+    //using Bool = ::FcBool;
+    //using ::FcPatternGetBool;
 } // end namespace Fontconfig
 
 namespace dwm {
@@ -36,13 +36,14 @@ enum class ColorschemeIndex {
 using Color = Xft::Color;
 struct Draw;
 struct Cursor {
+    X::Display& _display;
     X::Cursor _cursor;
-    Draw& _d;
-    Cursor(Draw& d, int shape);
+    Cursor(X::Display& d, int shape);
     ~Cursor();
 };
 
 class Font {
+public:
     Font(X::Display& disp, unsigned int h, Xft::Font* font, Fontconfig::Pattern* pattern) : _display(disp), _h(h), _xfont(font), _pattern(pattern) { }
     ~Font();
     X::Display& getDisplay() noexcept { return _display; }
@@ -102,7 +103,7 @@ public: // map functions
     void map(X::Window win, int x, int y , unsigned int w, unsigned int h);
 private:
     unsigned int _w, _h;
-    X::Display& _dpy;
+    X::Display& _display;
     int _screen;
     X::Window _root;
     X::Drawable _drawable;

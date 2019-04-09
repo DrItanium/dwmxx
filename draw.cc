@@ -63,7 +63,7 @@ Font::~Font() {
 
 Draw::Draw(X::Display& disp, int screen, X::Window root, unsigned int w, unsigned int h)
     : _display(disp), _screen(screen), _root(root), _w(w), _h(h) {
-        _drawable = XCreatePixmap(&_display, _root, _w, _h, DefaultDepth(_display, _screen));
+        _drawable = XCreatePixmap(&_display, _root, _w, _h, DefaultDepth(&_display, _screen));
         _gc = XCreateGC(&_display, _root, 0, nullptr);
         XSetLineAttributes(&_display, _gc, 1, LineSolid, CapButt, JoinMiter);
 }
@@ -83,6 +83,12 @@ Draw::~Draw()
 {
     XFreePixmap(&_display, _drawable);
     XFreeGC(&_display, _gc);
+}
+
+Cursor::Cursor(X::Display& disp, int shape) : _display(disp), _cursor(XCreateFontCursor(&disp, shape)) { }
+
+Cursor::~Cursor() {
+    XFreeCursor(&_display, _cursor);
 }
 
 
