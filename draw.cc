@@ -127,5 +127,11 @@ Draw::getWidth(const std::string& text) noexcept {
     }
 }
 
+void
+Draw::map(X::Window win, int x, int y, unsigned int w, unsigned int h) {
+    XCopyArea(&_display, _drawable, win, _gc, x, y, w, h, x, y);
+    XSync(&_display, False);
+}
+
 
 } // end namespace dwm
