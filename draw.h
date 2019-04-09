@@ -22,7 +22,9 @@ namespace Xft {
 }
 namespace Fontconfig {
     using Pattern = ::FcPattern;
+    using Bool = ::FcBool;
     using ::FcPatternDestroy;
+    using ::FcPatternGetBool;
 } // end namespace Fontconfig
 
 namespace dwm {
@@ -65,7 +67,7 @@ public:
     using ColorschemeIterator= Colorscheme::iterator;
     using ConstColorschemeIterator = Colorscheme::const_iterator;
 public:
-    Draw(X::Display* display, int screen, X::Window win, unsigned int w, unsigned int h);
+    Draw(X::Display& display, int screen, X::Window win, unsigned int w, unsigned int h);
     ~Draw();
     void resize(unsigned int w, unsigned int h);
     unsigned int getFontWidth(const std::string& name) const noexcept;
