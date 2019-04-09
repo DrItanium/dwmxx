@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <tuple>
 #include <X11/Xlib.h>
 #include <X11/Xft/Xft.h>
 #include "util.h"
@@ -51,7 +52,8 @@ public:
     auto getH() const noexcept { return _h; }
     auto getXFont() noexcept { return _xfont; }
     auto getPattern() noexcept { return _pattern; }
-    void getExts(const std::string& text, unsigned int len, unsigned int* w, unsigned int* h);
+    void getExts(const std::string& text, unsigned int* w, unsigned int* h);
+    std::tuple<unsigned int, unsigned int> getExts(const std::string& text);
 private:
     X::Display& _display;
     unsigned int _h;

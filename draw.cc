@@ -1,6 +1,14 @@
 #include "draw.h"
 #include "util.h"
 
+namespace X {
+    using GlyphInfo = ::XGlyphInfo;
+} // end namespace X
+
+namespace Xft {
+    using Char8 = ::XftChar8;
+} // end namespace Xft
+
 namespace dwm {
 namespace utf8 {
     constexpr auto invalid = 0xFFFD;
@@ -91,7 +99,24 @@ Cursor::~Cursor() {
     XFreeCursor(&_display, _cursor);
 }
 
+std::tuple<unsigned int, unsigned int>
+Font::getExts(const std::string& text) {
+    
+    X::GlyphInfo ext;
+    XftTextExtentsUtf8(&_display, _xfont, (Xft::Char8*)text.c_str(), text.size(), &ext);
+    return std::tuple<unsigned int, unsigned int>(ext.xOff, _h);
+}
 
+void
+Font::getExts(const std::string& text, unsigned int* w, unsigned int* h) {
+    const auto [a,b] = getExts(text);
+    if (w) {
+        *w = a;
+    } 
+    if (h) {
+        *h = b;
+    }
+}
 
 
 } // end namespace dwm
